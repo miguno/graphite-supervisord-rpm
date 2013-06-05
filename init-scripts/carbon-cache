@@ -1,0 +1,48 @@
+#!/bin/bash
+#
+# chkconfig: 35 90 12
+# description: carbon-cache script
+#
+
+LOCKFILE=/var/lock/subsys/carbon
+GRAPHITE_ROOT=/opt/graphite
+CARBON_CONFIG=$GRAPHITE_CONFIG_DIR/conf/carbon.conf
+GRAPHITE_LIBS=$GRAPHITE_ROOT/lib
+CARBON_PIDFILE=/var/run/carbon/carbon.pid
+
+. /etc/init.d/functions
+
+start() {
+    env PYTHONPATH=$GRAPHITE_LIBS carbon-cache.py --config $CARBON_CONFIG --pidfile=$CARBON_PIDFILE start
+    touch $LOCKFILE
+    success $"carbon-cache started"
+    echo "carbon-cache started"
+}
+
+stop() {
+    env PYTHONPATH=$GRAPHITE_LIBS carbon-cache.py --config $CARBON_CONFIG --pidfile=$CARBON_PIDFILE stop
+    rm -f $LOCKFILE
+    success $"carbon-cache stopped"
+    echo "carbon-cache stopped"
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart|reload)
+        stop
+        start
+        ;;
+  status)
+        status carbon-cache.py
+        ;;
+  *)
+        echo "Usage: $0 {start|stop|restart|reload|status}"
+        exit 1
+esac
+
+exit 0
