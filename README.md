@@ -149,7 +149,7 @@ dependencies of our Graphite RPM files.
 
 ### Define a SECRET_KEY for Django/Graphite
 
-Edit ``webapp/graphite/app_settings.py`` and set ``SECRET_KEY`` to a difficult to guess (random) string.
+Edit ``/opt/graphite/webapp/graphite/app_settings.py`` and set ``SECRET_KEY`` to a difficult to guess (random) string.
 
     # Make this unique, and do not share it with anybody.
     SECRET_KEY = 'replace-me-with-a-difficult-to-guess-random-and-long-string'
