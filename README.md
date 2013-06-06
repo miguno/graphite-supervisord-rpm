@@ -189,7 +189,7 @@ $ sudo chage -I -1 -E -1 -m -1 -M -1 -W -1 -E -1 graphite
 
 ## Configure ownership of graphite-web storage directory
 
-```
+```bash
 $ sudo chown -R graphite:graphite /opt/graphite/storage
 ```
 
@@ -198,7 +198,7 @@ $ sudo chown -R graphite:graphite /opt/graphite/storage
 
 Copy the [local_settings.py](configs/local_settings.py) included in this repository to ``/opt/graphite/webapp/graphite/local_settings.py``:
 
-```
+```bash
 # When graphite is installed on the same machine as the checkout of this repository
 $ sudo cp configs/local_settings.py /opt/graphite/webapp/graphite/local_settings.py
 ```
