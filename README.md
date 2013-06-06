@@ -69,7 +69,7 @@ of numeric data over time.  It is used by the ``carbon`` storage backend.
 
 ## graphite-web
 
-``graphite-web`` is the web frontend of Graphite.
+``graphite-web`` is the web frontend of Graphite, based on [Django](https://www.djangoproject.com/).
 
     $ fpm -s python -t rpm \
         -d python-setuptools \
