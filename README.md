@@ -82,7 +82,6 @@ of numeric data over time.  It is used by the ``carbon`` storage backend.
         -d bitmap-lucida-typewriter-fonts -d bitmap-miscfixed-fonts \
         -d pycairo \
         -d python-gunicorn \
-        -d rrdtool-python \
         graphite-web
 
     # this will create => python-graphite-web-0.9.10-1.noarch.rpm
