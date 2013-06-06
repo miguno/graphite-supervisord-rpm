@@ -306,6 +306,8 @@ You can also verify correct startup by inspecting the log files at ``/var/log/ca
 
 Now you are ready to send metrics to Graphite from your applications.
 
+Open Graphite's web interface at [http://localhost:8080/](http://localhost:8080/) in your browser and take a look
+around.
 
 # Where to go from here
 
