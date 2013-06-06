@@ -32,19 +32,21 @@ Graphite is comprised of two components, the webapp frontend ``graphite-web``, a
 ``carbon``.  Data collection agents connect to ``carbon`` and send their data, and carbon's job is to make that data
 available for real-time graphing immediately and try to get it stored on disk as fast as possible.
 
-    $ fpm -s python -t rpm \
-        -d python-setuptools \
-        -d Django -d django-tagging \
-        -d python-devel \
-        -d python-twisted \
-        -d python-memcached \
-        -d python-sqlite2 \
-        -d bitmap -d bitmap-console-fonts -d bitmap-fixed-fonts -d bitmap-fonts-compat \
-        -d bitmap-lucida-typewriter-fonts -d bitmap-miscfixed-fonts \
-        -d pycairo \
-        carbon
+```bash
+$ fpm -s python -t rpm \
+    -d python-setuptools \
+    -d Django -d django-tagging \
+    -d python-devel \
+    -d python-twisted \
+    -d python-memcached \
+    -d python-sqlite2 \
+    -d bitmap -d bitmap-console-fonts -d bitmap-fixed-fonts -d bitmap-fonts-compat \
+    -d bitmap-lucida-typewriter-fonts -d bitmap-miscfixed-fonts \
+    -d pycairo \
+    carbon
 
-    # this will create => python-carbon-0.9.10-1.noarch.rpm
+# this will create => python-carbon-0.9.10-1.noarch.rpm
+```
 
 
 ## whisper
@@ -52,39 +54,43 @@ available for real-time graphing immediately and try to get it stored on disk as
 Whisper is a fixed-size database, similar in design to RRD (round-robin-database).  It provides fast, reliable storage
 of numeric data over time.  It is used by the ``carbon`` storage backend.
 
-    $ fpm -s python -t rpm \
-        -d python-setuptools \
-        -d Django -d django-tagging \
-        -d python-devel \
-        -d python-twisted \
-        -d python-memcached \
-        -d python-sqlite2 \
-        -d bitmap -d bitmap-console-fonts -d bitmap-fixed-fonts -d bitmap-fonts-compat \
-        -d bitmap-lucida-typewriter-fonts -d bitmap-miscfixed-fonts \
-        -d pycairo \
-        whisper
+```bash
+$ fpm -s python -t rpm \
+    -d python-setuptools \
+    -d Django -d django-tagging \
+    -d python-devel \
+    -d python-twisted \
+    -d python-memcached \
+    -d python-sqlite2 \
+    -d bitmap -d bitmap-console-fonts -d bitmap-fixed-fonts -d bitmap-fonts-compat \
+    -d bitmap-lucida-typewriter-fonts -d bitmap-miscfixed-fonts \
+    -d pycairo \
+    whisper
 
-    # this will create => python-whisper-0.9.10-1.noarch.rpm
+# this will create => python-whisper-0.9.10-1.noarch.rpm
+```
 
 
 ## graphite-web
 
 ``graphite-web`` is the web frontend of Graphite, based on [Django](https://www.djangoproject.com/).
 
-    $ fpm -s python -t rpm \
-        -d python-setuptools \
-        -d Django -d django-tagging \
-        -d python-devel \
-        -d python-twisted \
-        -d python-memcached \
-        -d python-sqlite2 \
-        -d bitmap -d bitmap-console-fonts -d bitmap-fixed-fonts -d bitmap-fonts-compat \
-        -d bitmap-lucida-typewriter-fonts -d bitmap-miscfixed-fonts \
-        -d pycairo \
-        -d python-gunicorn \
-        graphite-web
+```bash
+$ fpm -s python -t rpm \
+    -d python-setuptools \
+    -d Django -d django-tagging \
+    -d python-devel \
+    -d python-twisted \
+    -d python-memcached \
+    -d python-sqlite2 \
+    -d bitmap -d bitmap-console-fonts -d bitmap-fixed-fonts -d bitmap-fonts-compat \
+    -d bitmap-lucida-typewriter-fonts -d bitmap-miscfixed-fonts \
+    -d pycairo \
+    -d python-gunicorn \
+    graphite-web
 
-    # this will create => python-graphite-web-0.9.10-1.noarch.rpm
+# this will create => python-graphite-web-0.9.10-1.noarch.rpm
+```
 
 **TODO: Add dependency on python-carbon and python-whisper once we have these RPMs in a custom yum repository.  Do NOT**
 **try without a custom yum repository because if you do yum will install the old versions of python-carbon and**
@@ -98,11 +104,13 @@ _This step is only needed if you do not want to run carbon-cache via supervisord
 If you do not want to run ``carbon-cache`` via ``supervisord`` follow the instructions below to create an RPM that
 bundles a simple carbon-cache init script.
 
-    $ sudo cp init-scripts/carbon-cache /etc/init.d
-    $ fpm -s dir -t rpm -a all -n carbon-cache-init-script -v 1.0 /etc/init.d/carbon-cache
-    $ sudo rm /etc/init.d/carbon-cache
+```bash
+$ sudo cp init-scripts/carbon-cache /etc/init.d
+$ fpm -s dir -t rpm -a all -n carbon-cache-init-script -v 1.0 /etc/init.d/carbon-cache
+$ sudo rm /etc/init.d/carbon-cache
 
-    # this will create => carbon-cache-init-script-1.0-1.noarch.rpm
+# this will create => carbon-cache-init-script-1.0-1.noarch.rpm
+```
 
 After this RPM is installed you can start/stop ``carbon-cache`` via ``/etc/init.d/carbon-cache``.
 
@@ -111,19 +119,23 @@ After this RPM is installed you can start/stop ``carbon-cache`` via ``/etc/init.
 
 We will use ``supervisord`` to run the various Graphite daemons.
 
-    $ sudo yum install supervisor
-    $ sudo chkconfig supervisord on
-    # Recommended: secure supervisord configuration file (may contain user credentials)
-    $ sudo chmod 600 /etc/supervisord.conf
+```bash
+$ sudo yum install supervisor
+$ sudo chkconfig supervisord on
+# Recommended: secure supervisord configuration file (may contain user credentials)
+$ sudo chmod 600 /etc/supervisord.conf
+```
 
 
 # Installing Graphite
 
 ## Install our custom Graphite RPM files
 
-    $ sudo yum install python-carbon-0.9.10-1.noarch.rpm \
-                       python-whisper-0.9.10-1.noarch.rpm \
-                       python-graphite-web-0.9.10-1.noarch.rpm
+```bash
+$ sudo yum install python-carbon-0.9.10-1.noarch.rpm \
+                   python-whisper-0.9.10-1.noarch.rpm \
+                   python-graphite-web-0.9.10-1.noarch.rpm
+```
 
 By using ``yum`` instead of ``rpm`` to install the RPM files we can automatically resolve (download and install) the
 dependencies of our Graphite RPM files.
@@ -145,50 +157,60 @@ The default backend of Graphite is SQLite.  We will stick to that for the time b
 
 Run the following command to sync the database setup of Django:
 
-    # See https://answers.launchpad.net/graphite/+question/187148
-    $ sudo python webapp/graphite/manage.py syncdb
+```bash
+# See https://answers.launchpad.net/graphite/+question/187148
+$ sudo python webapp/graphite/manage.py syncdb
 
-    <snip>
+<snip>
 
-    You just installed Django's auth system, which means you don't have any superusers defined.
-    Would you like to create one now? (yes/no): yes
-    Username (Leave blank to use 'root'): jsmith
-    E-mail address: jsmith@example.com
-    Password:
-    Password (again):
-    Superuser created successfully.
-    Installing custom SQL ...
-    Installing indexes ...
-    No fixtures found.
+You just installed Django's auth system, which means you don't have any superusers defined.
+Would you like to create one now? (yes/no): yes
+Username (Leave blank to use 'root'): jsmith
+E-mail address: jsmith@example.com
+Password:
+Password (again):
+Superuser created successfully.
+Installing custom SQL ...
+Installing indexes ...
+No fixtures found.
+```
 
 
 ## Add a system account for Graphite
 
 We will use a dedicated user account to run the various Graphite daemons.  This improves security.
 
-    $ sudo groupadd -g 53012 graphite
-    $ sudo useradd -u 53012 -g 53012 -d /opt/graphite -s /bin/bash graphite -c "Graphite service account"
-    $ sudo chage -I -1 -E -1 -m -1 -M -1 -W -1 -E -1 graphite
+```bash
+$ sudo groupadd -g 53012 graphite
+$ sudo useradd -u 53012 -g 53012 -d /opt/graphite -s /bin/bash graphite -c "Graphite service account"
+$ sudo chage -I -1 -E -1 -m -1 -M -1 -W -1 -E -1 graphite
+```
 
 
 ## Configure ownership of graphite-web storage directory
 
-    $ sudo chown -R graphite:graphite /opt/graphite/storage
+```
+$ sudo chown -R graphite:graphite /opt/graphite/storage
+```
 
 
 ## Configure graphite-web
 
 Copy the [local_settings.py](configs/local_settings.py) included in this repository to ``/opt/graphite/webapp/graphite/local_settings.py``:
 
-    # When graphite is installed on the same machine as the checkout of this repository
-    $ sudo cp configs/local_settings.py /opt/graphite/webapp/graphite/local_settings.py
+```
+# When graphite is installed on the same machine as the checkout of this repository
+$ sudo cp configs/local_settings.py /opt/graphite/webapp/graphite/local_settings.py
+```
 
 Set up directories and permissions:
 
-    $ sudo mkdir /var/run/gunicorn-graphite
-    $ sudo chown -R graphite:graphite /var/run/gunicorn-graphite
-    $ sudo mkdir /var/log/gunicorn-graphite
-    $ sudo chown -R graphite:graphite /var/log/gunicorn-graphite
+```bash
+$ sudo mkdir /var/run/gunicorn-graphite
+$ sudo chown -R graphite:graphite /var/run/gunicorn-graphite
+$ sudo mkdir /var/log/gunicorn-graphite
+$ sudo chown -R graphite:graphite /var/log/gunicorn-graphite
+```
 
 Add gunicorn to ``supervisord``:
 
@@ -214,20 +236,26 @@ If you run into startup problems with gunicorn then increase the log level to se
 Configure the [carbon-cache](http://graphite.readthedocs.org/en/latest/carbon-daemons.html) daemon.  See also
 [Configuring carbon](http://graphite.readthedocs.org/en/latest/config-carbon.html).
 
-    $ sudo cp /opt/graphite/conf/storage-schemas.conf.example /opt/graphite/conf/storage-schemas.conf
-    $ sudo cp /opt/graphite/conf/storage-aggregation.conf.example /opt/graphite/conf/storage-aggregation.conf
+```bash
+$ sudo cp /opt/graphite/conf/storage-schemas.conf.example /opt/graphite/conf/storage-schemas.conf
+$ sudo cp /opt/graphite/conf/storage-aggregation.conf.example /opt/graphite/conf/storage-aggregation.conf
+```
 
 Copy the [carbon.conf](configs/carbon.conf) included in this repository to ``/opt/graphite/conf/carbon.conf``:
 
-    # When graphite is installed on the same machine as the checkout of this repository
-    $ sudo cp configs/carbon.conf /opt/graphite/conf/carbon.conf
+```bash
+# When graphite is installed on the same machine as the checkout of this repository
+$ sudo cp configs/carbon.conf /opt/graphite/conf/carbon.conf
+```
 
 Set up directories and permissions:
 
-    $ sudo mkdir -p /var/log/carbon
-    $ sudo chown -R graphite:graphite /var/log/carbon
-    $ sudo mkdir -p /var/run/carbon
-    $ sudo chown -R graphite:graphite /var/run/carbon
+```bash
+$ sudo mkdir -p /var/log/carbon
+$ sudo chown -R graphite:graphite /var/log/carbon
+$ sudo mkdir -p /var/run/carbon
+$ sudo chown -R graphite:graphite /var/run/carbon
+```
 
 Add carbon-cache to ``supervisord``:
 
@@ -248,20 +276,26 @@ Add carbon-cache to ``supervisord``:
 
 If you run into startup problems with ``carbon-cache`` then increase the log level to see what is failing exactly:
 
-    $ carbon-cache.py --log-level=debug ...
+```bash
+$ carbon-cache.py --log-level=debug ...
+```
 
 
 ## Start Graphite daemons
 
 Run the following command to start both ``gunicorn`` (and thus ``graphite-web``) and ``carbon-cache``:
 
-    $ sudo service supervisord restart
+```bash
+$ sudo service supervisord restart
+```
 
 Check via ``supervisorctl`` whether the daemons are properly running:
 
-    $ sudo supervisorctl status
-    graphite-carbon-cache RUNNING    pid 22058, uptime 0:00:10
-    graphite-gunicorn RUNNING    pid 22057, uptime 0:00:10
+```bash
+$ sudo supervisorctl status
+graphite-carbon-cache RUNNING    pid 22058, uptime 0:00:10
+graphite-gunicorn RUNNING    pid 22057, uptime 0:00:10
+```
 
 You can also verify correct startup by inspecting the log files at ``/var/log/carbon/`` and
 ``/var/log/gunicorn-graphite/``.
