@@ -330,6 +330,7 @@ There are many dashboards available for Graphite.  In no order of priority some 
 * [Descartes](https://github.com/obfuscurity/descartes) -- introspective dashboard for Graphite
 * [Graphene](https://github.com/jondot/graphene) -- realtime dashboard & graphing toolkit
 * [Graphiti](https://github.com/paperlesspost/graphiti) -- front-end and graph storage application for Graphite
+* [Team Dashboard](http://fdietz.github.io/team_dashboard/) -- visualize your team's metrics all in one place
 
 The blog post [Dashboards for Graphite](http://dashboarddude.com/blog/2013/01/23/dashboards-for-graphite/) provides a
 good overview and comparison between the various options.
