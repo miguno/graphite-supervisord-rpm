@@ -28,6 +28,10 @@ We are using [fpm](https://github.com/jordansissel/fpm) to build our own RPMs fo
 
 ## carbon
 
+Graphite is comprised of two components, the webapp frontend ``graphite-web``, and the backend storage application
+``carbon``.  Data collection agents connect to ``carbon`` and send their data, and carbon's job is to make that data
+available for real-time graphing immediately and try to get it stored on disk as fast as possible.
+
     $ fpm -s python -t rpm \
         -d python-setuptools \
         -d Django -d django-tagging \
@@ -45,6 +49,9 @@ We are using [fpm](https://github.com/jordansissel/fpm) to build our own RPMs fo
 
 ## whisper
 
+Whisper is a fixed-size database, similar in design to RRD (round-robin-database).  It provides fast, reliable storage
+of numeric data over time.  It is used by the ``carbon`` storage backend.
+
     $ fpm -s python -t rpm \
         -d python-setuptools \
         -d Django -d django-tagging \
@@ -61,6 +68,8 @@ We are using [fpm](https://github.com/jordansissel/fpm) to build our own RPMs fo
 
 
 ## graphite-web
+
+``graphite-web`` is the web frontend of Graphite.
 
     $ fpm -s python -t rpm \
         -d python-setuptools \
