@@ -185,10 +185,6 @@ Copy the [local_settings.py](configs/local_settings.py) included in this reposit
 
 Set up directories and permissions:
 
-## Configure gunicorn (which runs graphite-web)
-
-Set up directories and permissions:
-
     $ sudo mkdir /var/run/gunicorn-graphite
     $ sudo chown -R graphite:graphite /var/run/gunicorn-graphite
     $ sudo mkdir /var/log/gunicorn-graphite
