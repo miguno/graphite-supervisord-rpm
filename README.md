@@ -25,6 +25,11 @@ The instructions below are based on the following software versions:
 
 We are using [fpm](https://github.com/jordansissel/fpm) to build our own RPMs for Graphite.
 
+**Note:** Eventually we want to add dependencies between the Graphite packages (e.g. ``python-carbon`` should depend on
+``python-whisper``).  While the ``fpm`` commands can be updated quickly to account for that this is not all that needs
+to be done.  The reason is that ``yum`` will by default happily install packages of the same name from its normal yum
+repositories -- which is not what we want because we are intending to use our own RPMs.
+
 
 ## carbon
 
@@ -94,10 +99,6 @@ $ fpm -s python -t rpm \
 
 # this will create => python-graphite-web-0.9.10-1.noarch.rpm
 ```
-
-**TODO: Add dependency on python-carbon and python-whisper once we have these RPMs in a custom yum repository.  Do NOT**
-**try without a custom yum repository because if you do yum will install the old versions of python-carbon and**
-**python-whisper, which is not what we want.**
 
 
 ## Optional: carbon-cache init script
@@ -302,4 +303,32 @@ graphite-gunicorn RUNNING    pid 22057, uptime 0:00:10
 
 You can also verify correct startup by inspecting the log files at ``/var/log/carbon/`` and
 ``/var/log/gunicorn-graphite/``.
+
+Now you are ready to send metrics to Graphite from your applications.
+
+
+# Where to go from here
+
+## Add metrics support to your applications
+
+Graphite is widely supported, for instance by Yammer's excellent
+[Metrics library](http://metrics.codahale.com/manual/graphite/), so you should be seeing your own metrics flowing into
+Graphite very quickly.
+
+I will not go into detail here -- finding the right client for your favorite programming language or application is
+just a web search away.  A first starting point is
+[Tools That Work With Graphite](http://graphite.readthedocs.org/en/latest/tools.html).
+
+
+## Add dashboards to Graphite
+
+There are many dashboards available for Graphite.  In no order of priority some of the more popular ones are:
+
+* [Tasseo](https://github.com/obfuscurity/tasseo) -- live dashboard for Graphite
+* [Descartes](https://github.com/obfuscurity/descartes) -- introspective dashboard for Graphite
+* [Graphene](https://github.com/jondot/graphene) -- realtime dashboard & graphing toolkit
+* [Graphiti](https://github.com/paperlesspost/graphiti) -- front-end and graph storage application for Graphite
+
+The blog post [Dashboards for Graphite](http://dashboarddude.com/blog/2013/01/23/dashboards-for-graphite/) provides a
+good overview and comparison between the various options.
 
