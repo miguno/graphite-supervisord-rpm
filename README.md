@@ -29,8 +29,9 @@ We are using [fpm](https://github.com/jordansissel/fpm) to build our own RPMs fo
 ## carbon
 
 Graphite is comprised of two components, the webapp frontend ``graphite-web``, and the backend storage application
-``carbon``.  Data collection agents connect to ``carbon`` and send their data, and carbon's job is to make that data
-available for real-time graphing immediately and try to get it stored on disk as fast as possible.
+[carbon](https://github.com/graphite-project/carbon).  Data collection agents connect to ``carbon`` and send their data,
+and carbon's job is to make that data available for real-time graphing immediately and try to get it stored on disk as
+fast as possible.
 
 ```bash
 $ fpm -s python -t rpm \
@@ -51,8 +52,9 @@ $ fpm -s python -t rpm \
 
 ## whisper
 
-Whisper is a fixed-size database, similar in design to RRD (round-robin-database).  It provides fast, reliable storage
-of numeric data over time.  It is used by the ``carbon`` storage backend.
+[Whisper](https://github.com/graphite-project/whisper) is a fixed-size database, similar in design to RRD
+(round-robin-database).  It provides fast, reliable storage of numeric data over time.  It is used by the ``carbon``
+storage backend.
 
 ```bash
 $ fpm -s python -t rpm \
@@ -73,7 +75,8 @@ $ fpm -s python -t rpm \
 
 ## graphite-web
 
-``graphite-web`` is the web frontend of Graphite, based on [Django](https://www.djangoproject.com/).
+[graphite-web](https://github.com/graphite-project/graphite-web) is the web frontend of Graphite, based on
+[Django](https://www.djangoproject.com/).
 
 ```bash
 $ fpm -s python -t rpm \
