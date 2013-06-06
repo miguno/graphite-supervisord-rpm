@@ -107,7 +107,7 @@ bundles a simple carbon-cache init script.
 After this RPM is installed you can start/stop ``carbon-cache`` via ``/etc/init.d/carbon-cache``.
 
 
-# Installing prerequisites of Graphite
+# Installing prerequisites
 
 We will use ``supervisord`` to run the various Graphite daemons.
 
