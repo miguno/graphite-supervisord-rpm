@@ -12,6 +12,10 @@ How to install and configure Graphite 0.9.x via RPMs on RHEL 6 and run it under 
 * We rely on ``supervisord`` to run -- and start/stop -- the Graphite-related daemons ``gunicorn`` and ``carbon-cache``
   (the latter daemon collects the actual stats data from other applications)
 
+Once installed you can collect metrics from your applications and infrastructure tools, and add visually appealing
+dashboards on top of Graphite to add (meaningful) lipstick to Graphite's default web frontend (see dashboard list
+at the end of this document).
+
 
 # Versions
 
