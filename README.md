@@ -31,7 +31,7 @@ We are using [fpm](https://github.com/jordansissel/fpm) to build our own RPMs fo
     $ fpm -s python -t rpm \
         -d python-setuptools \
         -d Django -d django-tagging \
-        -d python-devel -d python-hashlib \
+        -d python-devel \
         -d python-twisted \
         -d python-memcached \
         -d python-sqlite2 \
@@ -48,7 +48,7 @@ We are using [fpm](https://github.com/jordansissel/fpm) to build our own RPMs fo
     $ fpm -s python -t rpm \
         -d python-setuptools \
         -d Django -d django-tagging \
-        -d python-devel -d python-hashlib \
+        -d python-devel \
         -d python-twisted \
         -d python-memcached \
         -d python-sqlite2 \
@@ -65,7 +65,7 @@ We are using [fpm](https://github.com/jordansissel/fpm) to build our own RPMs fo
     $ fpm -s python -t rpm \
         -d python-setuptools \
         -d Django -d django-tagging \
-        -d python-devel -d python-hashlib \
+        -d python-devel \
         -d python-twisted \
         -d python-memcached \
         -d python-sqlite2 \
