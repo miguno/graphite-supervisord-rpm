@@ -2,6 +2,18 @@
 
 How to install and configure Graphite 0.9.x via RPMs on RHEL 6 and run it under process supervision with supervisord.
 
+**Update March 2014:**
+I have released [Wirbelsturm](https://github.com/miguno/wirbelsturm), a Vagrant and Puppet based tool to perform 1-click
+local and remote deployments, with a focus on big data related infrastructure such as Apache Kafka and Apache Storm.
+Thanks to Wirbelsturm you don't need to follow this tutorial to manually install and configure a Graphite server.
+Simply uncomment the `monitoring_server` section in your `wirbelsturm.yaml`, then run `vagrant up monitor1`, and you
+have deployed your first Graphite server.  Behind the scenes Wirbelsturm uses the
+[puppet-graphite](https://github.com/miguno/puppet-graphite) module mentioned below.
+
+**Update February 2014:**
+I have released a [Puppet](http://puppetlabs.com/) module to easily deploy Graphite:
+[puppet-graphite](https://github.com/miguno/puppet-graphite).  This module automates most of the manual tasks listed in
+this article.
 
 # What we want to do
 
